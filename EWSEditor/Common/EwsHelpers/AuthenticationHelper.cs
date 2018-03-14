@@ -33,7 +33,7 @@ namespace EWSEditor.Common
 
             AuthenticationContext authenticationContext = new AuthenticationContext(authority, false);
 
-            AuthenticationResult authenticationResult = authenticationContext.AcquireToken(serverName, clientID, clientAppUri, PromptBehavior.Always);
+            AuthenticationResult authenticationResult = authenticationContext.AcquireTokenAsync(serverName, clientID, clientAppUri, new PlatformParameters(PromptBehavior.Always)).Result;
 
             //System.Diagnostics.Debug.WriteLine(authenticationResult.UserInfo.DisplayableId);
             MailboxBeingAccessed = authenticationResult.UserInfo.DisplayableId;
@@ -62,7 +62,7 @@ namespace EWSEditor.Common
 
             AuthenticationContext authenticationContext = new AuthenticationContext(authority, false);
 
-            AuthenticationResult authenticationResult = authenticationContext.AcquireToken(serverName, clientID, clientAppUri, PromptBehavior.Always);
+            AuthenticationResult authenticationResult = authenticationContext.AcquireTokenAsync(serverName, clientID, clientAppUri, new PlatformParameters(PromptBehavior.Always)).Result;
 
             // Add authenticaiton token to requests
             oExchangeCredentials = new OAuthCredentials(authenticationResult.AccessToken);
